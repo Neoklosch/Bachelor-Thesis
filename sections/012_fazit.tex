@@ -1,0 +1,50 @@
+\chapter{Zusammenfassung und Ausblick}
+Ziel dieser Arbeit war es, einen Prototypen zu entwickeln, der die Möglichkeiten des Dateimanagements unter Verwendung verschiedener Cloudservices aufzeigt.
+
+Um die gestellte Aufgabe zu lösen, wurden in der Anforderungsanalyse die Voraussetzungen für das System dargelegt.
+Dabei wurde das grobe Konzept des Prototypen erklärt und die unterschiedlichen Anforderungen an die Cloudservices und die zu verwendenden Technologien erarbeitet.
+Weiterhin dienten die erstellten Use-Cases dem besseren Verständnis der Funktionsweise des Prototypen.
+Die Evaluation bestehender Anwendung und Dienste zeigt Umsetzungsmöglichkeiten und zugleich Abgrenzungskriterien für CloudGrid auf.
+
+Anschließend wurde im Kapitel Systementwurf konkreter auf die geplante Umsetzung des Prototypen eingegangen.
+Dabei wurde sowohl die zu verwendende Programmierumgebung ermittelt, als auch die Architektur des Systems aufgezeigt.
+Diese konnte in drei Schichten, Datenhaltungs-, Anwendungslogik- und Präsentationsschicht, unterteilt werden.
+Die Evaluation der Cloudservices wertete, sowohl aus technischer, als auch aus rechtlicher Sicht, bestehende Dienste, anhand der zuvor definierten Kriterien, aus.
+
+Die konkrete Umsetzung des Prototypen wurde daraufhin im Kapitel Implementierung ausgearbeitet.
+Dazu wurde neben der Projektstruktur, die Funktionsweise externer und auch selbst entwickelter Module erklärt und deren Einbindung in das System erläutert.
+Weiterhin wurden die Realisierung der einzelnen Schichten erörtert.
+
+Abschließend wurde im Abschnitt Evaluation und Demonstration der entwickelte Prototyp bewertet und die Handhabung, sowie die Funktionsweise, aufgezeigt.
+
+Im Prototypen von CloudGrid wurden alle zuvor erarbeiteten Anforderungen umgesetzt.
+Bei einer zukünftige Weiterentwicklung des vorgestellten Systems sollte primär auf eine Erweiterung des Cloudservice Portfolios gesetzt werden.
+Um dies zu realisieren, sollten sowohl mehr Authentifizierungsmethoden unterstützt werden, als auch das Datenformat \ac{XML}, da dies von mehreren Anbietern verwendet wird.
+Dadurch könnten bereits vier weitere, der in Abschnitt \ref{systementwurf-cloudanbieter} evaluierten Anbieter, eingebunden werden.
+Darüber hinaus würde die Anzahl nochmals steigen, wenn auch kostenpflichtige Anbieter hinzugefügt werden.
+Jedoch bleibt der Nachteil bestehen, dass anbieterspezifische Funktion nicht in CloudGrid integrierbar sind, wie beispielsweise die Versionierung von Dropbox.
+
+Weiterhin sollte eine Synchronisierung über mehrere Clients realisiert werden.
+Das erhöht die Nutzbarkeit für den Anwender und entspricht der Funktionalität aktueller Clientanwendungen der Anbieter.
+Hierbei müssen wahrscheinlich größere systemarchitektonische Anpassungen vorgenommen werden.
+Ein Konzept wäre, die lokalen Benutzerdaten von CloudGrid ebenfalls redundant bei den Cloudservices vorzuhalten, um diese auf einem weiteren Client einzubinden.
+Ebenfalls denkbar wäre die Einbindung eines weiteren Serverdienstes, der die entsprechenden Informationen vorhält.
+Allerdings ist diese Möglichkeit abweichend von der momentanen Grundidee von CloudGrid, dem Benutzer ein System zu ermöglichen, bei dem er jederzeit Überblick über den Verbleib seiner Daten hat.
+
+Zudem würde die Umsetzung mobiler Anwendungen, für Smartphones und Tablets, die Anwenderfreundlichkeit erhöhen.
+Auch hier müssten konzeptionelle Änderungen durchgeführt werden, welche sich möglicherweise mit denen des Multiclient Konzepts gleichen.
+
+Auf Seiten der Node.js Anwendung würde die Erweiterung des \frqq watchr\flqq\ Moduls um die Events \frqq Umbenennen\flqq\ und \frqq Verschieben\flqq\ die Performance steigern und unnötige Dateioperationen vermeiden.
+Weiterhin ist es möglich, weitere Einstellungsmöglichkeiten, wie das Setzen eines anderen oder eines weiteren zu überprüfenden Ordners oder auch die Wahl des Verschlüsselungsalgorithmus.
+Dabei muss jedoch beachtet werden, dass sich solch eine Option auf bereits hochgeladene Dateien auswirken würde.
+
+Wie bereits in Abschnitt \ref{evaluation-des-system} beschrieben, sollte auch die Einbindung weiterer Cloudservices modularer und generischer gestaltet werden.
+Momentan müssen mehrere Dateien bearbeitet werden, um einen Dienst zu CloudGrid hinzuzufügen.
+Besser wäre es, wenn es einen Ordner geben würde, wo Module für Cloudservices vorgehalten und weitere hinzugefügt werden können.
+Dieser wird beim Systemstart auf neue Module geprüft und diese entsprechend eingebunden.
+
+Abschließend sollte die \ac{GUI} erweitert werden, um die Benutzerfreundlichkeit zu steigern.
+Dazu zählen mehr Informationen für den Benutzer, wie beispielsweise ein Hinweis, wenn der Speicherplatz eines Anbieters ausgereizt ist oder ein Anbieter nicht mehr verfügbar ist.
+
+Letztendlich zeigt das hier vorgestellte System, erfolgreich und in einer prototypischen Qualität, die Funktionsweise des erarbeiteten Konzeptes auf.
+Das Ergebnis kann somit als solide Grundlage für eine Weiterentwicklung angesehen werden.

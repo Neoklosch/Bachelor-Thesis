@@ -1,0 +1,143 @@
+\documentclass
+[
+a4paper,
+ngerman,
+oneside,
+openright,                    % Kap.beginn immer rechts! (fkt. nur bei report, nicht bei article)
+11pt,                         % ersatzweise 12pt, wenn mehr Seiten entstehen sollen
+table
+]
+{report}
+
+\input{settings/_einstellungen.tex}
+
+\begin{document}
+\def\cpp{C{}\texttt{++}} % \cpp is shortcut now for: print C++ nicely
+
+\pagestyle{empty}
+\include{sections/000_titelblatt}
+\newpage
+\include{sections/001_danksagung}
+\newpage
+\include{sections/001_eigenstaendigkeitserklaerung}
+\newpage
+
+
+\pagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{3}
+
+\tableofcontents
+\cleardoublepage
+
+
+\include{sections/xx3_abkuerzungsverzeichnis}
+
+\listoffigures
+\protect \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\cleardoublepage
+
+\listoftables
+\protect \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\cleardoublepage
+
+\lstlistoflistings
+\protect \addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\include{sections/002_einleitung}
+
+% Chapter 1 - Grundlagen
+\include{sections/003_clouddienste}
+\include{sections/004_raid}
+\include{sections/005_verschluesselung_und_hash}
+\include{sections/006_authentifizierungsverfahren}
+%\include{007_programmierumgebungen}
+
+% Chapter 2
+\include{sections/008_anforderungsanalyse}
+
+% Chapter 3
+\include{sections/009_systementwurf}
+
+% Chapter 4
+\include{sections/010_implementierung}
+
+% Chapter 5
+\include{sections/011_demonstration}
+
+% Chapter 6
+\include{sections/012_fazit}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+%\include{StandDerTechnik}
+%\include{Grundlagen}
+%\include{Umsetzung}
+%\include{Systemarchitektur}
+%
+%
+%
+%
+%\protect \addtocontents{toc}{\protect\newpage}  % Seitenumbruch im Inhaltsverzeichnis
+%\cleardoublepage
+%\include{ExperimentelleValidierung}
+%\include{Schlussbetrachtungen}
+%
+%
+%
+%\begin{appendix}
+%\include{Anhang_Mathematik}                 % A
+%\include{Anhang_FormatDerParameterdateien}  % B
+%\include{Anhang_Quelltexte}                 % C
+%\include{Anhang_Datenblaetter}              % D
+%\include{Anhang_Glossar}                    % E
+%\end{appendix}
+%
+%
+%
+%% Erstes Literaturverzeichnis, ohne BibTeX
+%
+%\interlinepenalty=10000 % Literatureinträge: Absätze zusammenhalten
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+%\include{xx2_literaturverzeichnis}
+%
+%
+%
+%% Zweites Literaturverzeichnis, mit BibTeX
+
+%\begin{appendix}
+%\include{xx1_glossar}
+%\end{appendix}
+
+\renewcommand\bibname{Literaturverzeichnis}
+\nocite{*} % auch die nicht verwendeten bibtex-Einträge einblenden
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{bib/bibliografie}
+\interlinepenalty=100
+
+% Sachverzeichnis einfügen
+
+%\renewcommand\indexname{Sachverzeichnis}
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Sachverzeichnis}
+%\linespread{0.99} % Abhilfe zu Schusterjungen .. im Index. Die Zahl ist entspr zu variieren
+%\printindex
+
+
+%% Schmutzblatt (leere Seite am Ende)
+
+\newpage
+\pagestyle{empty}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{resources/Bilder_Allgemein/leer.jpg}
+\end{figure}
+
+\end{document}

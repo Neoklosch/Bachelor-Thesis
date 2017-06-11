@@ -1,0 +1,157 @@
+\section{Kryptographie}
+\label{kryptographie}
+In diesem Abschnitt wird auf kryptographische Grundlagen eingegangen, welche bei der Umsetzung des zu entwickelnden Systems relevant sind.
+Dazu werden zuerst Zufallszahlen und deren Besonderheiten aufgezeigt.
+Nachfolgend wird ein kurzer Überblick über verschiedene Verschlüsselungsverfahren, sowie deren Vor- und Nachteile herausgearbeitet.
+Abschließend werden Hashfunktionen erklärt und ein erweitertes Verfahren zur Nutzung selbiger, welches als Salt bezeichnet wird, erarbeitet.
+
+\subsection{Zufallszahlen}
+\label{zufallszahlen}
+Zufallszahlen finden in vielen Computerprogrammen Anwendung.
+So können zufällige Laufwege von Figuren in einem Computerspiel berechnet, eine Playlist von Musiktiteln zufällig durchlaufen oder Bilder in eine Diashow in einer zufälligen Reihenfolge angezeigt werden\cite[vgl.][Seite 62]{ling02}.
+Dabei werden die Zufallszahlen von einem Zufallsgenerator erzeugt.
+Jedoch ist der Zufall "`auf Tastendruck"' nicht so leicht zu realisieren\cite[vgl.][Seite 62]{ling02}.
+Aus diesem Grund spricht man auch von Pseudozufallsfolgen.
+
+\subsubsection{Pseudozufallsfolgen}
+\label{pseudozufallsfolgen}
+Das Problem bei Zufallszahlen ist, dass nicht ohne Weiteres ein "`echter Zufall"' erzeugt werden kann\cite[vgl.][Seite 62]{ling02}.
+Die Zahlenfolge wird von einem Algorithmus erzeugt, welcher bei gleichem Ausgangswert, auch das gleiche Ergebnis liefert\cite[vgl.][Seite 62]{ling02}.
+Daher spricht man in diesem Zusammenhang von "`Pseudozufallsfolgen"'.
+Diese reichen in vielen Fällen aus, beispielsweise bei den genannten Anwendungsbeispielen, bieten jedoch für die Kryptographie eine nur unzureichende Sicherheitsmöglichkeit\cite[vgl.][Seite 62]{ling02}.
+
+\subsubsection{Kryptographisch sichere Zufallsfolgen}
+\label{sicherzufallsfolgen}
+Die kryptographisch sicheren Zufallsfolgen unterscheiden sich von den Pseudozufallsfolgen.
+Diese werden immer noch von einem Zufallsgenerator erzeugt und unterliegen auch einem Algorithmus, jedoch sind sie an bestimmte Kriterien gebunden\cite[vgl.][Seite 63 ff.]{ling02}.
+"`Demgemäß dürfen Zufallsfolgen mit realistischem Aufwand nicht vorhersagbar sein. Das bedeutet, daß selbst bei Kenntnis des Verfahrens, wie die Zufallsfolge erzeugt wurde, keinerlei Möglichkeit bestehen sollte, dieselbe Folge zu generieren"'\cite[Seite 63]{ling02}.
+Dazu werden unterschiedliche Verfahren verwendet.
+So können beispielsweise die Systemzeit, ein Mausbewegungsmuster oder Tastatureingaben verwendet werden.
+Ferner kann auch auf spezielle Hardware zurück gegriffen werden, welche physikalische Messwerte benutzt um diese in die Generierung mit einfließen zu lassen\cite[vgl.][Seite 63 ff.]{ling02}.
+
+\subsection{Symmetrische Verschlüsselungsverfahren}
+\label{symmetrischekrypto}
+Ein Verschlüsselungsverfahren wandelt einen Klartext in einen für Menschen nicht lesbaren Text um\cite[vgl.][Seite 15]{ling02}.
+Ziel ist es, eine Nachricht von A nach B zu übertragen, ohne das Unbefugte diese lesen können.
+Um einen Text zu verschlüsseln, wird ein Schlüssel, oder auch Passphrase, verwendet.
+Wenn sowohl zur Chiffrierung, als auch zur Dechiffrierung ein und derselbe Schlüssel verwendet wird, dann spricht man von symmetrischen Verschlüsselungsverfahren\cite[vgl.][Seite 69]{ling02}.
+Dieser Schlüssel muss sowohl dem Sender als auch dem Empfänger vorliegen, sodass dieser zuvor ausgetauscht werden muss.
+Darin besteht auch das größte Sicherheitsrisiko, da ein Angreifer beispielsweise den Schlüssel beim Übertragen abfangen oder sich als Empfänger tarnen könnte\cite[vgl.][Seite 69]{ling02}.
+Um dieses Konzept zu umgehen wurde, 1978 das asymmetrische Verschlüsselungsverfahren RSA, welches nach den Anfangsbuchstaben der Entwickler Rivest, Shamir und Adleman benannt wurde, entwickelt\cite[vgl.][Seite 115]{ling02}.
+Dieses verwendet zum Chiffrieren und zum Dechiffrieren einen eigenen Schlüssel.
+Es wird auch als Public-Key-Verschlüsselung bezeichnet\cite[vgl.][Seite 110]{ling02}.
+Da jedoch letzteres Verfahren im Rahmen dieser Arbeit keine Relevanz hat, wird nur auf symmetrische Verfahren detailliert eingegangen.
+
+\subsubsection{Blockchiffren}
+\label{blockchiffren}
+Bei dem Blockchiffrenverfahren werden sowohl Klartext als auch der Chiffretext in einzelne Blöcke fester Länge unterteilt, welche in eigenen Vorgängen unabhängig von den anderen Blöcken verschlüsselt beziehungsweise entschlüsselt werden\cite[vgl.][Seite 72]{ling02}.
+Dabei kann die Blocklänge, je nach verwendetem Verfahren, variieren\cite[vgl.][Seite 72]{ling02}.
+Sollte ein Block nicht die volle Länge besitzen, so wird dieser mit den fehlenden Bits aufgefüllt, was als Padding bezeichnet wird\cite[vgl.][Seite 72]{ling02}.
+Die Chiffrierung eines Blocks wird dabei als Runde bezeichnet, sodass ein Verfahren mehrere Runden durchlaufen muss.
+Die Anzahl der Runden ist dabei ebenfalls von dem verwendeten Verfahren abhängig.
+
+\subsubsection{DES}
+\label{des}
+Der \ac{DES} wurde 1974 von IBM veröffentlicht und 1977 zum offiziellen Verschlüsselungsstandard erklärt.
+Sowohl die Blocklänge, als auch die Schlüssellänge des \ac{DES} betragen 64 Bit, wobei bei der Schlüssellänge 8 Bit als Prüfsumme verwendet werden und somit real nur 56 Bit zur Verfügung stehen\cite[vgl.][Seite 78]{ling02}.
+Somit ergeben sich 2$^{56}$ mögliche Schlüssel, das entspricht 72 Billiarden Schlüsseln\cite[vgl.][Seite 80]{ling02}.
+Das größte Sicherheitsrisiko liegt dennoch in der Schlüssellänge.
+Hochleistungsrechner oder auch Botnetze können eine solche Schlüssellänge mit Bruteforce-Attacken in wenigen Stunden entschlüsseln\cite[vgl.][Seite 80]{ling02}.
+Daher gilt \ac{DES} heutzutage nicht mehr als sicher.
+Aus diesem Grund wurde der Triple-\ac{DES} Algorithmus eingeführt.
+Selbiger wendet lediglich \ac{DES} drei mal auf eine Nachricht an\cite[vgl.][Seite 82]{ling02}.
+Dadurch steigt die Schlüssellänge, je nach Modus, entweder auf 112 Bit bei zwei verschiedenen Schüsseln oder auf 168 Bit bei drei verschiedenen Schlüsseln\cite[vgl.][Seite 82]{ling02}.
+Der Aufwand für einen potenziellen Angreifer steigt dabei erheblich, was aus der Verwendung von 2$^{112}$ beziehungsweise 2$^{168}$ möglichen Schlüsseln resultiert\cite[vgl.][Seite 82]{ling02}.
+Lediglich die Geschwindigkeit ist der große Nachteil dieses Verfahrens.
+Es gibt mehrere Algorithmen, die schneller arbeiten, jedoch als genauso oder sogar sicher als Triple-\ac{DES} gelten.
+
+\subsubsection{AES}
+\label{aes}
+Im Jahr 2000 wurde der \ac{AES} als Nachfolger von \ac{DES} eingeführt\cite[vgl.][Seite 90]{ling02}.
+\ac{AES} verwendet den Rijndael-Algorithmus, der von Joan Daemen und Vincent Rijmen, im Rahmen einer internationalen Ausschreibung zur Einreichung von Vorschlägen für den \ac{AES} im Jahr 1997, entwickelt wurde\cite[vgl.][Seite 89]{ling02}.
+Dieser arbeitet mit 128-, 192- oder 256-Bit-Blöcken und mit einer Schlüssellänge von 128, 192 oder 256 Bit\cite[vgl.][Seite 89]{ling02}.
+Die Rundenanzahl basiert sowohl auf der Block-, als auch auf der Schlüssellänge.
+Bis heute gilt dieses Verfahren als sicher\cite[vgl.][Seite 94]{ling02}.
+Für die Beschreibung der detaillierte Funktionsweise von \ac{AES} sei auf die Literatur \cite[Seite 81 ff.]{spitz11} verwiesen.
+%TODO mehr?
+
+\subsubsection{Blowfish}
+\label{blowfish}
+Der Blowfish-Algorithmus wurde im Jahr 1994 von Bruce Schneier veröffentlicht\cite[vgl.][Seite 96]{ling02}.
+Er arbeitet wesentlich schneller als \ac{DES} und verwendet ausschließlich einfache Operationen wie Addition und XOR\cite[vgl.][Seite 96]{ling02}.
+Die Schlüssellänge hingegen ist variabel und beträgt zwischen 32 und 448 Bit\cite[vgl.][Seite 96]{ling02}.
+"`Das Verfahren basiert auf zwei Teilen, einer Schlüsselexpansion, die den bis zu 448 Bit großen Schlüssel in verschiedene Teilschlüssel [...] umwandelt, die zusammen 4168 Bit ergeben. Die eigentliche Chiffrierung wird in einer Funktion F in sechzehn Runden vollzogen. Die einzelnen Runden bestehen aus einer schlüssel- und datenabhängigen Substitution und einer schlüsselabhängigen Permutation"'\cite[Seite 97]{ling02}.
+Für die detaillierte Funktionsweise des Blowfishalgorithmus sei auf die Literatur \cite{ling02} verwiesen.
+Blowfish ist frei zugänglich und steht damit für kommerzielle und nicht-kommerzielle Anwendungen zur Verfügung.
+Bis heute gibt es keine nennenswerten Schwachstellen in der Verschlüsselung\cite[vgl.][Seite 100]{ling02}.
+
+\subsubsection{Twofish}
+\label{twofish}
+Twofish ist eine Weiterentwicklung des Blowfish-Algorithmus und wurde ebenfalls von Bruce Schneier, von seiner Firma Counterpane Internet Security, veröffentlicht.\cite[vgl.][Seite 100]{ling02}
+Das Verfahren war eines von fünf beim Ausscheid zur Bestimmung des Nachfolgers von \ac{DES}\cite[vgl.][Seite 100]{ling02}.
+Jedoch unterlag er, genau wie Blowfish, dem Rijndael-Algorithmus in direkten Geschwindigkeitsvergleich.
+Genau wie Blowfish ist er frei verfügbar, was ihn sowohl für nicht-kommerzielle als auch für kommerzielle Anwendungen prädestiniert.
+Die Schlüssellänge beträgt 128, 192 oder 256 Bit, bei einer Blocklänge von 128 Bit und 16 Runden.
+Auch dieser Algorithmus zählt bis heute als sicher\cite[vgl.][Seite 100 f.]{ling02}.
+Er wird in Programmen wie TrueCrypt\footnote{http://www.truecrypt.com} oder auch KeePass\footnote{http://www.keepass.com} verwendet.
+
+\subsection{Hashfunktionen}
+\label{hashfunktionen}
+Hashfunktionen zählen zur symmetrischen Kryptographie.
+Sie erzeugen aus einer Nachricht beliebiger Länge eine Prüfsumme, oftmals auch als Hashsumme oder Hashwert bezeichnet, fester Länge, meist 128 oder 160 Bit lang\cite[vgl.][Seite 127]{ling02}.
+Im Gegensatz zur Chiffrierung, darf aus einem Hashwert die originale Nachricht nicht wiederhergestellt werden können\cite[vgl.][Seite 127]{ling02}.
+Dieses Verfahren nennt man Einweg-Hashfunktionen.
+Weiterhin müssen Hashfunktionen kollisionsresistent sein.
+Das bedeutet, dass es nahezu unmöglich sein muss, zwei unterschiedliche Nachrichten mit gleichem Hashwerten zu finden\cite[vgl.][Seite 127]{ling02}.
+Dies wiederum schließt nicht aus, dass es diese gibt.
+Nahezu unmöglich bedeutet dabei, "`dass es weder mit heutigen Computern, noch mit Rechnern aus der nahen Zukunft möglich sein soll, dies in einem sinnvollen Zeitrahmen zu berechnen"'\cite[Seite 11 f.]{schwenk10}.
+Hashfunktionen werden eingesetzt, um Manipulationssicherheit zu gewährleisten.
+Anschaulich gesprochen bedeutet das, dass im ersten Schritt die Prüfsumme einer Nachricht erstellt wird.
+Daraufhin wird die eigentliche Nachricht vom Sender verschickt.
+Der Empfänger berechnet beim Empfangen erneut die Prüfsumme und vergleicht diese dann mit der ersten.
+Dies setzt voraus, dass der Empfänger die originale Prüfsumme zuvor erhalten hat.
+Sollten beide Werte übereinstimmen, kann der Empfänger davon ausgehen, dass die Nachricht nicht verändert wurde.
+Wenn die Werte hingegen nicht übereinstimmen, kann die Nachricht als kompromittiert angesehen werden.
+Beispiele dafür sind die Prüfsumme in einem TCP/IP Header oder Session-IDs in Webanwendungen\cite[vgl.][Seite 11 ff.]{schwenk10}.
+
+\subsubsection{MD5}
+\label{md5}
+Das \ac{MD5} Verfahren erzeugt aus einer Nachricht mit beliebiger Länge eine 128 Bit Prüfsumme\cite[vgl.][Seite 130]{ling02}.
+Dieses Verfahren wurde 1991 von Ronald L. Rivest am \ac{MIT}, entwickelt\cite[vgl.][]{md5}.
+"`Das Verfahren verarbeitet Blöcke mit einer Länge von 512 Bit und generiert einen 128-Bit-Hashwert"'\cite[vgl.][Seite 130]{ling02}.
+Jedoch gilt \ac{MD5} als nur bedingt sicher, nachdem 1996 eine Schwachstelle in der Kompressionsfunktion gefunden wurde\cite[vgl.][Seite 132]{ling02}.
+Hans Dobbertin zeige daraufhin auf, wie Kollisionen berechnet werden können\cite[vgl.][Seite 132]{ling02}.
+Dies widerspricht der Kollisionsresistenz von Hashfunktionen.
+In der Praxis wird von der Nutzung abgeraten\cite[vgl.][Seite 132]{ling02}.
+
+\subsubsection{SHA}
+\label{sha}
+Die Abkürzung SHA steht für Secure-Hash-Algorithmus und wurde 1993 vom \ac{NIST} in Zusammenarbeit mit der \ac{NSA} entwickelt\cite[vgl.][Seite 131]{ling02}.
+Mit Hilfe dieses Verfahrens werden 160 Bit lange Prüfsummen erzeugt\cite[vgl.][Seite 131]{ling02}.
+Ähnlich wie auch \ac{MD5} gilt der \ac{SHA} als nicht mehr sicher\cite[vgl.][Seite 132]{ling02}.
+Daher wurde 2005 die SHA-2-Familie veröffentlicht.
+Diese wird in SHA-224, SHA-256, SHA-384 und SHA-512 unterteilt.
+Die Nummer steht dabei für die Länge der resultierenden Prüfsumme.
+SHA-2 zählt bis heute als sicher.
+Jedoch wurde im Jahr 2008 ein internationaler Wettbewerb gestartet, wo der Nachfolger SHA-3 festgelegt werden sollte.
+Im Jahr 2012 wurden Guido Bertoni, Joan Daemen, Michaël Peeters und Gilles Van Assche mit dem von ihnen entwickelten Verfahren, namens "`Keccak"', als Sieger bekannt gegeben\footnote{http://www.nist.gov/itl/csd/sha-100212.cfm}.
+
+\subsubsection{Salt}
+\label{salt}
+Prüfsummen spielen auch bei der Speicherung von Passwörtern eine große Rolle.
+So sollten diese immer als eine Prüfsumme p, welche mit einer Einweg-Hashfunktion H erzeugt wurde, gespeichert werden.
+Das erschwert einem potentiellen Angreifer die Ermittlung des originalen Passworts x.
+Sollte er jedoch Kenntnisse über das verwendete Hashverfahren haben, so kann er mit sogenannten Rainbowtables die Zeit zum Aufspüren von x senken.
+Rainbowtables bestehen meist aus einfachen Key-Value-Pairs.
+Der Key gibt dabei die unter Verwendung von H resultierende Prüfsumme und der Value das originale Passwort an.
+Der Angreifer muss also lediglich p mit den Prüfsummen aus der Rainbowtable vergleichen und kann somit x ermitteln.
+Aus diesem Grund wurde die Verwendung eines Salt entwickelt.
+Bei diesem Verfahren wird der Aufwand für den Angreifer nochmals erhöht.
+Dazu wird neben dem p, eine weitere Prüfsumme s erstellt.
+Diese wird als Salt bezeichnet.
+In der einfachsten Form wird H(x + s) = p erzeugt.
+Daraus resultiert, dass der Angreifer, bevor er p mit seiner Rainbowtable vergleichen kann, eine neue Table unter Verwendung von s erzeugen muss, um diese dann zu durchlaufen.
+Bei einem einzelnen Passwort erhöht dieses Verfahren den Aufwand nur geringfügig, jedoch wird bei großen Benutzer-Datenbanken der Aufwand erheblich erhöht.
+Voraussetzung dafür ist, dass jeder Benutzer seinen eigenen Salt erhält.
+Darüber hinaus gibt es noch Abwandlungen dieses Verfahrens, wo der Salt nicht an das Ende des Passwortes geschrieben wird, sondern geteilt und an den Anfang und das Ende gestellt wird.
+Somit wird der Aufwand zum Ermitteln von x erneut vergrößert, jedoch nur solange der Angreifer keine Kenntnis über die Art der Verwendung von s hat.

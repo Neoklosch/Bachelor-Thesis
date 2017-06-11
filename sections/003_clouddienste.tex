@@ -1,0 +1,131 @@
+\chapter{Grundlagen}
+
+\section{Clouddienste}
+Das Thema Cloud-Computing ist momentan allgegenwärtig in der Informatik.
+Dennoch gibt es keine standardisierte Definition, was die "`Cloud"' ist.
+Das Wort "`Cloud"' oder im deutschen "`Wolke"' weist jedoch auf zwei wichtige Konzepte hin, nämlich Virtualisierung und Skalierbarkeit\cite[vgl.][Seite 35]{hoell11}.
+Bei der Virtualisierung werden Computerressourcen transparent zusammengefasst beziehungsweise aufgeteilt.
+Dadurch wird eine beliebige Sicht auf die Infrastruktur geschaffen, wodurch keine systembedingten Abhängigkeiten für eine Anwendung entstehen\cite[vgl.][Seite 2]{baun10}.
+
+Der zweite wichtige Aspekt, die Skalierbarkeit, ermöglicht es, zusätzliche Ressourcen ohne großen Aufwand in das System zu integrieren, sei es um Hardware nachzurüsten oder bestehende Systeme zusammen zu fassen.
+Das hat den Vorteil, dass ein Unternehmen nicht mehr in diese investieren und selbst verwalten muss.
+Es kann sich auf die Umsetzung seiner Geschäftsidee konzentrieren und bei wachsenden Anforderungen Ressourcen flexibel vom Provider beziehen\cite[vgl.][Seite 2]{baun10}.
+
+Als großer Kritikpunkt lassen sich hingegen die Sicherheitsbedenken aufführen.
+Dadurch, dass die Anwendungslogik an eine externe Firma ausgelagert wird, verliert das Unternehmen die Kontrolle über seine Daten.
+Zudem muss es sich auf die Sicherheitsmaßnahmen der Anbieter verlassen und hat keinen Einfluss auf selbige.
+Besonders bei sensiblen Daten, wie Krankenakten von Patienten oder Kundendaten einer Bank, spielen Sicherheitsaspekte eine übergeordnete Rolle, wodurch unter Umständen von der Verwendung von Cloud-Computing abgeraten werden muss.
+Auch die Verfügbarkeit und Performance von Ressourcen in einer Cloud geben Grund zur Kritik.
+Sollte ein Service für mehrere Stunden nicht verfügbar sein, so kann ein erheblicher wirtschaftlicher Schaden für die betroffene Firma entstehen.
+Zudem existieren momentan keine Standards bei der Implementierung von Ressourcen, womit ein schneller Wechsel des Anbieters in der Regel nicht einfach möglich ist\cite[vgl.][Seite 3]{baun10}.
+
+Je nach Anwendungsfall muss ein Unternehmen sich daher detailliert überlegen, ob es Cloud-Computing verwenden möchte und welche Form und welcher Anbieter dabei seinen Ansprüchen genügt.
+
+Neben der Auslagerung von Anwendungslogiken gibt es mehrere Dienste die vorgefertigte Lösungen anbieten.
+So streamen Spotify\footnote{\url{http://www.spotify.com}} oder Deezer\footnote{\url{http://www.deezer.com}} Musik, Youtube\footnote{\url{http://www.youtube.de}} streamt Videos, Google Docs\footnote{\url{https://docs.google.com/}} bietet eine komplette Office Suite zum kollaborativen Arbeiten an und sogar Bildbearbeitung ist mit Diensten wie dem Photoshop Express Editor\footnote{\url{http://www.photoshop.com/tools/expresseditor}} möglich.
+Die Vorteile für den Benutzer liegen dabei auf der Hand.
+Er kann mobil und über verschiedene Geräte hinweg seine Daten abrufen und bearbeiten, ohne dabei auf zusätzliche Hardware wie USB-Sticks oder DVDs zurückgreifen zu müssen.
+Darüber hinaus muss sich der Anwender nicht mehr manuell um die Aktualisierung seiner Daten auf verschiedene Geräte kümmern.
+Beispielsweise bearbeitet er ein Foto in der Cloud, speichert dieses dort und kann es später von einem anderen Rechner herunterladen.
+Dadurch, dass sich der Anbieter des Clouddienstes um ein sinnvolles Datenbackup kümmern muss, beispielsweise durch redundante Datenhaltung auf mehreren Servern, wird für den Benutzer eine Ausfallsicherheit gewährleistet.
+Sollte der Rechner defekt sein, gehen die Daten nicht verloren, sondern sind weiterhin auf dem Server verfügbar.
+
+Zudem kann die Architektur von Clouddiensten aus zwei Perspektiven betrachtet werden.
+Einerseits aus organisatorischer Sicht und andererseits aus technischer Sicht\cite[vgl.][Seite 25]{baun10}.
+Zu den erstgenannten zählen die "`Private Cloud"', die "`Public Cloud"' und die "`Hybrid Cloud"'\cite[vgl.][Seite 25]{baun10}.
+Clouddienste, die aus technischen Sicht betrachtet werden, können in "`\ac{IaaS}"', "`\ac{PaaS}"' und "`\ac{SaaS} eingeteilt werden\cite[vgl.][Seite 25]{baun10}.
+
+\subsection{Clouddienste aus organisatorischer Sicht}
+Bei der organisatorischen Betrachtung von Clouddiensten, werden Benutzer und Anbieter strukturell voneinander getrennt.
+Der Benutzer verwendet dabei einen Dienst, welcher vom Anbieter offeriert wird.
+Beide Einheiten können dem selben Unternehmen angehören, werden jedoch separate betrachtet.
+
+\subsubsection{Private Cloud}
+Unter "`Private Cloud"' versteht man eine Cloud, bei der sowohl die Benutzer als auch der Anbieter derselben organisatorischen Einheit angehören\cite[vgl.][Seite 25 f.]{baun10}.
+Es ist also ein geschlossenes Netzwerk, wie beispielsweise ein firmeninternes Intranet, welches den Benutzern exklusive Ressourcen zur Verfügung stellt\cite[vgl.][Seite 40]{hoell11}.
+Hauptgrund für die Verwendung von "`Private Clouds"' sind Sicherheitsaspekte.
+Gerade bei sensiblen Daten ist diese Art der Cloud von großem Vorteil, da sich dadurch viele Sicherheitsprobleme beseitigen lassen.
+So bleibt die Kontrolle über die Daten bei der Organisation selbst und wird nicht an Dritte weitergeben\cite[vgl.][Seite 26]{baun10}.
+Außerdem können einzelne Ressourcen kontrollierter an Benutzer weitergegeben werden.
+Ein Mitarbeiter erhält so zwar Zugang zu seinem eigenen Dienstplan, jedoch nicht zu dem seiner Kollegen, wohingegen der Geschäftsführer Zugriff auf alle Dienstpläne hat.
+Auch Hardwareressourcen können flexibel skaliert und entsprechend der aktuellen Situation angepasst werden.
+
+Jedoch muss die Verwaltung und Wartung der Cloud, sowohl soft- als auch hardwareseitig, von der Organisation selbst übernommen werden.
+Dieser Aspekt ist aus unternehmerischer Sicht kostenintensiver und daher möglicherweise unattraktiver.
+Besonders da diese, je nach Umfang, von einem oder mehreren Administratoren gepflegt werden muss.
+
+\subsubsection{Public Cloud}
+Eine "`Public Cloud"' kann als ein am Markt angebotener Clouddienste angesehen werden\cite[vgl.][Seite 38]{hoell11}.
+Es sind also Cloud-Angebote, bei denen der Anbieter und die potenziellen Benutzer nicht zu ein- und derselben organisatorischen Einheit gezählt werden\cite[vgl.][Seite 25]{baun10}.
+Meist sind jene Anbieter gemeint, wenn von der "`Cloud"' gesprochen wird.
+Die Ressourcen solcher Dienste werden meist von vielen Nutzern gleichzeitig geteilt, welche nur durch die Virtualisierung als eigene Umgebung für den einzelnen Benutzer erscheinen.
+Viele Dienstleister bieten darüber hinaus ein Web-Portal oder gar eine \ac{API} zum Interagieren mit dem Dienst an.
+Diese sind für den Betreiber leicht skalierbar, sodass weitere Hardwareressourcen jederzeit eingebunden werden können.
+Besonders bei wachsenden Anforderungen an das System ist dieser Aspekt essenziell.
+Auf Seiten des Nutzers lässt sich dieses Prinzip nur schwer anwenden.
+"`Eine Anpassung an spezifische Anwenderanforderungen ist üblicherweise nur sehr eingeschränkt möglich/erwünscht bzw. steht den Skalierungs- und Effizienzinteressen des Betreibers gegenüber"'\cite[Seite 39]{hoell11}.
+
+Eine übliche Bezahlmethode ist "'Pay-per-Use"', das bedeutet je nach benutzten Ressourcen fallen mehr oder weniger hohe Kosten an, sowie die "`Flatrate"', für die der Nutzer einen festen Betrag bezahlt, wobei er einen vordefinierten Umfang der Ressourcen zur Verfügung gestellt bekommt.
+Ein prominenter Vertreter für "`Pay-per-User"' ist Amazon EC2\footnote{\url{http://aws.amazon.com/de/ec2}}, wohingegen beispielsweise Dropbox\footnote{\url{https://www.dropbox.com/business}} oder Spotifiy\footnote{\url{https://www.spotify.com/de}} auf ein Flaterate-Model setzen.
+
+Gerade im Gegensatz zu "`Private Clouds"' ergeben sich bei den "`Public Clouds"' zahlreiche Bedenken.
+So muss für jedes System "`hinsichtlich Compliance, Sicherheit, Verfügbarkeit, aber auch Performance"'\cite[Seite 40]{hoell11}. detailliert geprüft werden, ob eine "`Public Cloud"' den Anforderungen gerecht wird.
+Durch den Verlust der, im Vergleich zu den "`Private Clouds"', absoluten Kontrolle über die Daten des Benutzers, müssen beim Verstoß gegen vertraglich vereinbarte Regelungen, diese erst juristisch durchgesetzt werden\cite[vgl.][Seite 40]{hoell11}.
+Besonders der zeitliche Aspekt von Gerichtsverfahren birgt ein großes Risiko für Unternehmen.
+
+\subsubsection{Hybrid Cloud}
+"`Hybrid Clouds"' sind eine Mischform aus "`Public Clouds"' und "`Private Clouds"'.
+Hierbei wird eine "`Private Cloud"' auf organisationseigenen Ressourcen betrieben, jedoch werden zusätzlich Services herkömmlicher Datenverarbeitungslösungen mittels \acp{API} von "`Public Cloud"' Anbietern eingebunden.
+Somit können konkrete Anforderungen an ein System für das jeweilige Unternehmen angepasst werden.
+Etwaige Sicherheitsvorgaben können eingehalten werden und gleichzeitig Skalierungseffekte genutzt werden\cite[vgl.][Seite 42]{hoell11}.
+Durch Virtualisierung wird auch bei "`Hybrid Clouds"' dem Benutzer ein geschlossenes System dargestellt, sodass dieser weder einen Unterschied noch einen Übergang zwischen den einzelnen Clouds bemerkt\cite[vgl.][Seite 11]{hoell11}.
+
+Als Nachteil kann eine erhöhte Komplexität bei der Integration solcher Systeme aufgeführt werden.
+Eine nahtlose und für den Benutzer transparente Implementierung muss sorgfältig geplant und von den entsprechenden Administratoren und Entwicklern eingebunden werden.
+Zudem muss detailliert geprüft werden, welche Komponenten in die "`Public Clouds"' auszulagern sind, damit die Nachteile selbiger nicht das Gesamtsystem beeinträchtigen.
+
+\subsection{Clouddienste aus technischer Sicht}
+Bei der technischen Betrachtung der Clouddienste wird eine abstrahiert Sicht auf Hard- und Software geboten.
+Der Anbieter kümmert sich um die Wartung und Pflege der Ressourcen, wohingegen der Kunde virtualisierte Ressourcen angeboten bekommt.
+
+\subsubsection{Infrastructure as a Service}
+Einem Benutzer wird bei der Verwendung der \ac{IaaS}-Schicht eine abstrahierte Sicht auf die Hardware, also unter anderem auf ein bestehendes Netzwerk, einen Server und deren räumliche und klimatische Bedingungen oder auch nur auf Massenspeichermedien, geboten\cite[vgl.][Seite 47]{hoell11}.
+Dabei wird dem Kunden meist eine Teilmenge der eigentlichen Ressourcen zur Verfügung gestellt.
+"`Man könnte IaaS auch als eine im Wesentlichen durch Einsatz von Software abstrahierte und virtualisierte Rechenzentrumsressource auffassen"'\cite[Seite 47]{hoell11}.
+Das bedeutet, dass sich meist mehrere Kunden ein und dieselbe Ressource teilen, welche lediglich auf Softwareebene virtualisiert wird.
+Besonders in Hinsicht auf die Skalierbarkeit der Ressourcen ist das ein erheblicher Vorteil.
+
+Als Beispiel für solche Services kann man virtuelle Server von Hostingprovidern oder auch Dienste wie Amazon EC2 und Dropbox nennen.
+Letztere bieten darüber hinaus noch Schnittstellen zur Kommunikation mit den Diensten an, wohin gegen virtuelle Server meist über einen \ac{SSH} Zugang verfügen.
+
+\subsubsection{Platform as a Service}
+Die \ac{PaaS}-Schicht baut auf der \ac{IaaS}-Schicht auf und bietet dem Benutzer Anwendungen, Datenbanken oder Webservices, mit denen er arbeiten kann.
+Oftmals wird diese auch als \frqq Middleware\flqq\ bezeichnet\cite[vgl.][Seite 47]{hoell11}.
+In der Praxis richtet sich dieser Service meist an Entwickler.
+Der Vorteil gegenüber \ac{IaaS} ist ein verminderter Wartungsaufwand.
+Das bedeutet, dass es nicht mehr notwendig ist Software auf einem virtuellen Server zu aktualisieren oder eine Firewall auf selbigem zu konfigurieren.
+Ähnlich wie bei \ac{IaaS} ist auch dieser Service leicht skalierbar und kann flexibel an die Bedürfnisse eines Unternehmens angepasst werden.
+
+Prominente Vertreter für diese Art von Services sind Microsoft Azure\footnote{\url{http://www.windowsazure.com/de-de}} und Google App Engine\footnote{\url{https://cloud.google.com/products}}.
+Beide verfügen über ein ähnliches Angebot und ermöglichen eine stundenweise Nutzung und Bezahlung.
+
+\subsubsection{Software as a Service}
+Zur \ac{SaaS}-Schicht gehören Anwendungen in der Cloud, die direkt an den Endkunden adressiert sind\cite[vgl.][Seite 35]{baun10}.
+Dabei wird die Software direkt angeboten, ohne dass sich der Kunde um die Wartung weiterer Ressourcen kümmern muss.
+Alle zur Ausführung erforderlichen Ressourcen werden durch den Anbieter gestellt und gepflegt.
+"`Den Anspruch als Cloud-Computing-Service erfüllt es allerdings nur dann, wenn das Angebot massiv skalierbar, mehrmandantenfähig und elastisch flexibel ist"'\cite[Seite 47]{hoell11}.
+
+Diese Art von Service ist die derzeit am häufigsten angebotene und diskutierte Form Cloudservices\cite[vgl.][Seite 47]{hoell11}.
+Beispiele für diese Art des Services sind Google Maps, Google Docs oder das \ac{CRM} von salesforce\footnote{\url{https://www.salesforce.com/de/form/sem/landing/sales-cloud.jsp}}.
+%
+%\subsection{Zusammenfassung}
+%Cloudservices erfreuen sich großer Beliebtheit.
+%Aktuell ist diese ein häufig diskutiertes Thema und immer mehr Anbieter präsentieren sich auf dem Markt.
+%Jedoch muss ein Unternehmen genau abwägen welche Services es nutzen möchte und welche optimal zu dem eigenen Produkt passen.
+%\ac{SaaS}-Services richten sich dabei oftmals an Endverbraucher und sind für Firmen ehr uninteressant, jedoch können diese gerade beim kollaborativen Arbeiten einen großen Mehrwert bieten.
+%In der Praxis erweisen sich \ac{PaaS} und \ac{IaaS} Services als sinnvolle Lösungen für einzelne Unternehmungen.
+%Gerade durch eine preiswerte Nutzung und attraktiven Bezahlmodellen wie Pay-per-use sind "`Public Clouds"' oftmals eine gute Wahl.
+%Jedoch sollten für jeden Anwendungsfall detailliert die Vor- und Nachteile abgewogen werden.
+%Besonders im Bereich Datensicherheit.
+%Unternehmen welche mit sensiblen Daten arbeiten, sollten daher lieber in eine "`Private Cloud"' investieren oder, insofern es zum Konzept des Produktes passt, in eine "`Hybrid Cloud"', welche Teilaskpekte in einen "`Public Cloud"' Service auslagert.
+%

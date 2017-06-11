@@ -1,0 +1,50 @@
+\chapter{Einleitung}
+\label{einleitung}
+
+\section{Motivation}
+\label{motivation}
+Clouddienste erfreuen sich in den letzten Jahren einer rasant wachsenden Beliebtheit.
+Der Umsatz in Deutschland wird, laut einer Prognose von Bitkom, im Jahr 2013 um 47\% gegenüber dem Vorjahr ansteigen und liegt damit bei 7,8 Millarden Euro\cite[vgl.][Seite 2]{bitkom13}.
+Ebenfalls geht aus dieser Prognose hervor, dass sich auch in den kommenden Jahren ein ähnlich starkes Wachstum fortsetzt.
+So ist es nicht verwunderlich, dass immer mehr Anwendungen einen Upload der Daten in die Cloud ermöglichen oder gar komplett die Datenspeicherung in die Cloud verlagern.
+
+Von einem einfachen Datenbackup wie bei Dropbox\footnote{\url{http://www.dropbox.com}} oder Google Drive\footnote{\url{http://drive.google.com}}, zum Musikstreaming wie Spotify\footnote{\url{http://www.spotify.com}}, bis hin zum kollaborativen Arbeiten in den Google Docs\footnote{\url{http://docs.google.com}}, die Anwendungsgebiete sind dabei vielfältig und wachsen stetig.
+Google hat mit seinem Chromium OS\footnote{\url{http://www.chromium.org/chromium-os}} darüber hinaus ein cloudfähiges Betriebssystem auf den Markt gebracht.
+Dieses setzt ausschließlich auf Cloudanwendungen und ist ohne einen Internetanschluss nicht nutzbar.
+
+Jedoch sind viele Benutzer skeptisch bei der Verwendung von Clouddiensten.
+So geht aus einer Studie von Pierre Audoin Consultants hervor, dass 76\% der Befragten Bedenken in Bezug auf Sicherheit und Datenschutz bei der Verwendung von Clouddiensten haben \cite[vgl.][Seite 23]{pier13}.
+Bereits im Jahr 2010 gaben 72\% der deutschen Teilnehmer in einer Studie von Fujitsu an, dass sie befürchten, dass der Staat ihre Daten in der Cloud einsehen kann\cite[vgl.][Seite 05]{fuji13}.
+Darüber hinaus besteht jederzeit die Gefahr eines Datenverlustes.
+Die möglichen Szenarien sind dabei vielfältig.
+Die Anbieter, bei denen die Daten gespeichert werden, können ihren Dienst einstellen, wie es beispielsweise bei Megaupload im Jahr 2012 der Fall war\cite[vgl.][]{mega12}.
+Auch denkbar ist, dass sich Hacker Zugriff auf das System verschaffen und somit an die Daten der Nutzer gelangen.
+
+An diesem Punkt setzt die Bachelorarbeit an.
+Sie soll aufzeigen, welche Möglichkeiten sich für einen Benutzer bei der Verwendung von verschiedenen Cloudanbietern ergeben und wie in diesem Zusammenhang eine höhere Datensicherheit gewährleistet werden kann.
+Dazu werden Probleme bestehender Cloudservices aufgezeigt und Lösungskonzepte für selbige erarbeitet.
+
+\section{Zielsetzung}
+\label{zielsetzung}
+Ziel dieser Arbeit ist es, einen Prototypen, im folgenden CloudGrid genannt, zu entwickeln, der einerseits eine größere Datensicherheit für Dateien in der Cloud gewährleistet, andererseits den Speicherplatz von Cloudanbietern zusammenfasst und diesen dadurch vergrößert.
+Die Datensicherheit soll durch mehrere Methoden erhöht werden.
+Zum einen sollen die Daten in den gebündelten Clouds redundant gespeichert werden, was den Vorteil hat, das ein Service ausfallen und der Benutzer trotzdem über alle Daten verfügen kann.
+Weiterhin werden Dateien komprimiert, zerteilt und danach auf verschiedenen Cloudanbietern gespeichert.
+Das hat zur Folge, dass Daten nie vollständig bei einem Anbieter gespeichert werden und dadurch für Dritte nur bedingt brauchbar sind.
+Zugleich werden diese noch komprimiert, sodass mehr Speicherplatz zur Verfügung steht.
+Darüber hinaus werden alle Dateien verschlüsselt.
+Der Inhalt der Daten soll somit geschützt werden.
+
+CloudGrid soll als reine Desktopanwendung umgesetzt werden und damit komplett auf einen Serverdienst verzichten.
+Dies hat den Vorteil, dass sich der Benutzer nicht bei einem weiteren Service anmelden und seine Daten erneut an eine weitere Institution schicken muss.
+Dabei soll im Rahmen dieser Arbeit lediglich die Datenverwaltung mit einem Client zugelassen werden.
+Eine Synchronisierung über mehrere Clients erhöht die Komplexität und wird für eine etwaige spätere Version vorgesehen.
+
+\section{Aufbau der Arbeit}
+\label{aufbau}
+Zu Beginn werden Grundlagen zu Clouddiensten, Sicherheit und Dateihandling aufgezeigt.
+Anschließend werden die Anforderungen an den zu entwickelnden Prototypen definiert, sowie deren Besonderheiten und Möglichkeiten dargestellt.
+Darauf basierend wird die Architektur des Systems dargestellt und abschließend die konkrete Umsetzung erläutert.
+Zudem wird die Funktionsweise des Prototypen demonstriert und auf Defizite hingewiesen.
+Abschließend wird eine Zusammenfassung über die gewonnenen Kenntnisse und ein Ausblick auf Erweiterungsmöglichkeiten dieser Thematik 
+erörtert.

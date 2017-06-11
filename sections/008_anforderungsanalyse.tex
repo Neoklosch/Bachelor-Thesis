@@ -1,0 +1,181 @@
+\chapter{Anforderungsanalyse}
+\label{anforderungsanalyse}
+
+Die bisher erarbeiteten Grundlagen sollen in diesem Kapitel dazu dienen, die Anforderungen für die zu entwickelnde Anwendung zu formulieren.
+Dabei werden Aspekte betrachtet, die bei der konkreten Umsetzung relevant sein werden.
+
+\section{Systemanforderung}
+\label{anforderungcloudgrid}
+Mit CloudGrid soll ein Prototyp für eine Desktopapplikation erstellt werden, der es dem Benutzer ermöglicht, verschiedene Cloudservices zu einem einzigen System zusammenzufassen.
+Dieses soll auf einem \ac{RAID} ähnlichen Prinzip basieren, dass bedeutet, dass Dateien redundant auf mehreren Services gespeichert werden sollen.
+Der Vorteil für den Benutzer liegt darin, dass ihm durch diese Vereinigung einerseits mehr Speicherplatz zur Verfügung steht, andererseits eine größere Ausfallsicherheit gewährleistet werden kann.
+Selbst wenn ein Anbieter seinen Dienst einstellt oder temporär nicht verfügbar ist, so ist es dem Nutzer somit noch möglich, weiterhin Zugriff auf seine Daten zu erhalten.
+Die gesamte Dateiverwaltung soll auf dem Client durchgeführt werden.
+Es wird bewusst auf einen Serverdienst verzichtet, welcher die Verwaltungslogik der verschiedenen Services übernimmt.
+Dadurch soll das System für den Benutzer nachvollziehbarer sein, da er sich nicht bei einem weiteren Dienst anmelden muss und ihm mehr Kontrolle über den Verbleib seiner Daten geben.
+
+Neben dem Zusammenschluss mehrerer Cloudservices, ist das Dateihandling eine weitere zentrale Aufgabe von CloudGrid.
+Hierbei soll ein, vom Benutzer festgelegter Ordner auf Veränderungen überprüft werden.
+Dazu zählen auch Unterordner mit beliebiger hierarchischer Tiefe.
+Wenn eine Veränderung festgestellt wird, sollen mehrere Dateioperationen durchgeführt werden.
+Das bedeutet konkret, dass vor dem Upload einer Dateien, diese clientseitig komprimiert und somit der Upload beschleunigt werden soll.
+Um die Datensicherheit zu erhöhen, wird die Datei darüber hinaus beim Client verschlüsselt.
+Der Benutzer verschickt dadurch keine unverschlüsselten Dateien, welche beispielsweise durch Angriffe von einem Hacker abgefangen und ausgelesen werden könnten.
+Weiterhin liegt die Datei verschlüsselt beim dem Cloudanbieter, wodurch dieser keine Möglichkeit hat, den Inhalt der Datei einzusehen.
+Um diesen Aspekt noch zu verstärken, wird die Datei in mehrere Teilstücke fragmentiert, um diese daraufhin, wie bereits erwähnt, redundant auf verschiedenen Anbietern zu speichern.
+Bei sensiblen Daten, wie beispielsweise Dokumenten mit Passwörtern, trägt dieses Verfahren nur bedingt zur Dateisicherheit bei, da weiterhin Informationen über den Inhalt gewonnen werden können.
+Jedoch erschwert es einem potentiellen Angreifer Einsicht in die komplette Datei zu erhalten.
+Wird hingegen eine Datei gelöscht, muss das ebenfalls von CloudGrid erkannt werden und entsprechend alle Dateien auf den Cloudservices gelöscht werden.
+
+Der zu erstellende Prototyp wird darüber hinaus nur eine Synchronisierung mit einem Client unterstützen.
+Die Synchronisierung mit mehr als einem Client setzt ein komplexes Dateimanagement voraus, welches den Rahmen dieser Arbeit überschreiten würde.
+
+\section{Cloudanservices}
+\label{anfoderungcloudanbieter}
+Das Programm CloudGrid soll, wie bereits beschrieben, eine Verbindung mit mehreren Cloudanservices aufnehmen können.
+Dazu müssen zuvor relevante Dienste evaluiert werden.
+Dabei wurden folgende Kriterien als ausschlaggebend erachtet:
+\paragraph{Serviceart:} CloudGrid unterstützt ausschließlich Services, welche sich als Online-Speicher verstehen.
+Services wie beispielsweise Evernote oder Spotify, welche ebenfalls als Cloudservices angesehen werden, werden nicht unterstützt.
+\paragraph{Lizenzmodell:} Ein potenzieller Clouddienst muss über einen kostenlosen Service verfügen.
+Dennoch soll CloudGrid darauf ausgelegt sein, kostenpflichtige Services einbinden zu können.
+Auf eine ausführliche Analyse kann in dieser Arbeit aus finanzieller Sicht nicht eingegangen werden.
+\paragraph{Programmierschnittstelle:} Die Programmierschnittstelle, auch \ac{API} genannt, des Anbieters muss für Nutzer des kostenfreien Services verfügbar sein.
+Einige Anbieter bieten ihre Schnittstelle nur an, wenn der Benutzer einen kostenpflichtigen Service in Anspruch nimmt.
+Das ist sowohl für den Nutzer nachteilig, da er, falls er den Dienst zuvor testen möchte, diesen nicht in CloudGrid einbinden kann, als auch im Rahmen dieser Arbeit finanziell nicht realisierbar.
+Anbieter die über keine \ac{API} verfügen, werden darüber hinaus nicht vom Programm unterstützt.
+Bei der Umsetzung des Prototypen wird lediglich \ac{JSON} als Datenformat zugelassen, da dieses von vielen Anbietern verwendet wird.
+\paragraph{Authentifizierungmethoden:} Der Service muss über eine OAuth Authentifizierung verfügen.
+Diese kann sowohl in Version 1.0, 1.0A, als auch 2.0 vorliegen.
+Alle drei Versionen sollen in CloudGrid vollständig implementiert werden.
+Eigene Authentifizierungsverfahren sind aufwändiger zu integrieren und für den Prototypen nicht vorgesehen.
+\paragraph{Rechtliche Anforderungen:} Die rechtlichen Aspekte bei der Entwicklung von CloudGrid spielen eine elementare Rolle.
+Hierbei muss betrachtet werden, ob die AGB's der Anbieter, Programme, wie das zu entwickelnde System, einschränken oder sogar verbieten.
+Weiterhin muss geprüft werden, ob und inwiefern der Anbieter Rechte an den Daten erhält.
+Zudem wird geprüft, ob etwaige Limitierungen, wie eine bestimmte Anzahl von maximalen Requests, bei der Nutzung der \ac{API} existieren.
+
+\section{Technologien}
+\label{anforderungtech}
+Nachdem die Rahmenbedingungen für die Cloudservices definiert wurden, soll auch auf die technologischen Anforderungen von CloudGrid eingegangen werden.
+
+Bei der Wahl der Programmierumgebung wird besonderer Wert auf eine schnelle Bearbeitung des Filesystems gelegt.
+Dies ist besonders wichtig, da CloudGrid viele Dateioperationen durchführen muss und der Nutzer nicht unnötig lange auf diese warten soll.
+Da das Programm als Dienst im Hintergrund permanent ausgeführt wird, ist es darüber hinaus wichtig, dass zur Laufzeit nicht unnötig viele Ressourcen verbraucht werden.
+Nicht zuletzt soll eine plattformunabhängige Entwicklung möglich sein.
+
+Das \ac{GUI} soll dem Benutzer zur Verwaltung von CloudGrid dienen.
+Als wichtig bei der Wahl der Umgebung wird eine für den Benutzer gewohnte Umgebung erachtet.
+Er soll sich schnell in diese einfinden und alle relevanten Informationen erhalten.
+Beim ersten Start von CloudGrid erhält der Benutzer die Möglichkeit persönliche Einstellungen zu tätigen.
+Dazu zählt das Festlegen des zu überwachenden Ordners, Einbinden der Cloudservices und eine kurze Einführung in die Funktionalität von CloudGrid.
+All diese Einstellungen können später noch bearbeitet werden.
+Nachdem die grundlegende Initialisierung abgeschlossen ist, erhält der Benutzer die Möglichkeit Auskunft über durchgeführte Dateioperationen und dem Fortschritt des Dateiuploads zu bekommen.
+Darüber hinaus kann er sich Informationen zu den eingebundenen Cloudservices anzeigen lassen, wie beispielsweise die Auslastung des Speicherplatzes bei diesem Anbieter oder eine Liste der hochgeladenen Dateien.
+
+Zusätzlich soll es Entwicklern möglich sein, die \ac{GUI} anzupassen und um eigene Funktionalitäten zu erweitern.
+
+Auch bei der Wahl der \ac{GUI} ist die Plattformunabhängigkeit ein wichtiger Aspekt.
+Die \ac{GUI} soll sich auf allen Systemen gleich verhalten und sich optisch nicht oder nur gering unterscheiden.
+
+Alle Einstellungen von CloudGrid und Einstellungen, die vom Benutzer getätigt wurden, sollen lokal beim Client vorgehalten und nicht mit einem weiteren Dienst synchronisiert werden.
+Das hat den Vorteil, dass der Benutzer seine Informationen nicht an einen Drittanbieter weitergeben muss und somit eine größere Dateiintegrität gewährleistet wird.
+Neben den allgemeinen Einstellungen sollen auch die Dateiinformationen, wie beispielsweise die Verteilung der Teilstücke einer Datei auf den verschiedenen Cloudservices, deren Passphrase zum Entschlüsseln der Datei und die Hashwerte der originalen Datei gespeichert werden.
+%Zusätzlich wird die Ordnerstuktur des zu überwachenden Ordners in der Datenbank gespeichert.
+Außerdem sollen Informationen über die einzelnen Provider gespeichert werden, wie beispielsweise die App-Token zum Authentifizieren.
+Zur Speicherung der Daten muss daher ein geeignetes Datenbanksystem evaluiert werden.
+Dieses soll sich vom Programmierer leicht in die Anwendung integrieren lassen und ohne großen initialen Aufwand eingerichtet werden können.
+\newpage
+\section{Use-Case-Analyse}
+\label{anforderungusecase}
+In der Use-Case-Analyse sollen beispielhaft vier Fälle aufgezeigt werden, welche bei der Benutzung von CloudGrid auftreten können.
+
+\paragraph{Standardverhalten:}
+Der Benutzer startet CloudGrid.
+Daraufhin überwacht die Anwendung den zuvor ausgewählten Ordner auf Veränderungen.
+Nun bearbeitet der Benutzer eine Datei.
+CloudGrid erkennt eine Veränderung am Filesystem und zusätzlich, dass es sich dabei um eine Bearbeitung einer Datei handelt.
+Die Datei wird daraufhin komprimiert, gesplittet und die Teilstücke verschlüsselt.
+Dateiinformationen über die Teilstücke werden daraufhin in die lokale Datenbank gespeichert und die Teilstücke anschließend zu den jeweiligen Anbietern geuploaded.
+
+\paragraph{Dateiänderung vor Programmstart:}
+Der Benutzer bearbeitet eine Datei, bevor CloudGrid gestartet wurde.
+Beim Start der Anwendung wird die Ordnerüberwachung gestartet.
+Daraufhin werden die bestehenden Dateien auf Veränderung überprüft.
+%Dazu werden die Hashwerte aus der Datenbank mit den Hashwerten der Dateien, welche zur Laufzeit berechnet werden, verglichen.
+Zudem wird geprüft, ob neue Dateien hinzu gekommen sind oder bestehende gelöscht wurden.
+Sollte eine Dateiänderung erkannt werden, werden die zuvor genannten Dateioperationen durchgeführt und die Teilstücke geuploaded.
+
+\paragraph{Dateiänderung ohne Internetverbindung:}
+Der Benutzer startet CloudGrid und zu diesem Zeitpunkt besteht eine Internetverbindung.
+Die Ordnerüberwachung wird gestartet.
+Daraufhin wird die Verbindung mit dem Internet getrennt.
+CloudGrid wird in den Offline Modus geschaltet.
+Das bedeutet, dass alle aktiv laufenden Dateioperationen abgebrochen werden und die Ordnerüberwachung gestoppt wird.
+Sobald die Internetverbindung wiederhergestellt ist, ermittelt die Anwendung alle durchgeführten Veränderungen und führt entsprechend die Dateioperationen durch.
+
+\paragraph{Teilstück wird auf Server gelöscht:}
+Der Benutzer löscht ein Teilstück einer Datei direkt beim Cloudservice A.
+CloudGrid wird vom Benutzer gestartet.
+Die Anwendung prüft anhand der lokalen Datenbank, ob es Veränderungen bei den Cloudservices gibt.
+Die Löschung des Teilstücks bei Cloudservice A wird erkannt und geprüft, bei welchem Anbieter die Datei redundant gespeichert wurde.
+Daraufhin wird diese von Cloudservice B heruntergeladen, beim Benutzer zwischengespeichert und zum Cloudservice A erneut hochgeladen.
+Sollte das Teilstück auf beiden Services nicht mehr existieren, so werden alle Teilstücke der Datei auf allen Services gelöscht.
+Daraufhin werden die Dateioperationen auf der lokalen Datei beim Client durchgeführt und die Teilstücke erneut geuploaded.
+
+\section{Abgrenzung zu bestehenden Systemen}
+\label{anforderungabgrenzung}
+Im folgenden Abschnitt sollen Abgrenzungen zu verschiedenen bestehenden System aufgezeigt werden.
+Es werden nur Dienste betrachtet, die auf bestehende Cloudservices aufsetzen und diese um Funktionen, wie das Verschlüsseln von Dateien oder den Zusammenschluss mehrerer Dienste, erweitern.
+
+\paragraph{Boxcryptor:}
+Boxcryptor ist ein Programm, um Daten bei verschiedenen Cloudanbietern zu verschlüsseln.
+Dabei beschränkt sich dieser Dienst auf einen Anbieter.
+Eine Vereinigung mehrerer Dienste, wie bei CloudGrid, ist nicht gegeben.
+Darüber hinaus wird ein Benutzerkonto beim Anbieter benötigt.
+Die Dateien werden auf Benutzerseite verschlüsselt.
+Da jedoch der Anbieter potentiell die Möglichkeit hat, die Dateien durch seinen Dienst zu entschlüsseln, ist die Dateisicherheit nur bedingt gegeben.
+Der Vorteil liegt jedoch darin, dass sowohl ein Programm für die Nutzung auf Desktoptrechnern verfügbar ist, als auch \acp{App} für mobile Endgeräte wie Android und iOS.
+Um eine erweiterte Version von Boxcryptor verwenden zu können, muss ein kostenpflichtiger Premium Account gekauft werden.
+Dieser beinhaltet Funktionen wie die Nutzung von mehr als zwei Geräten oder die Verschlüsselung von Dateien auf mehr als einem Cloudservices.
+
+\paragraph{Cloudii:}
+Cloudii ist eine Android \ac{App}, die es dem Benutzer ermöglicht, mehrere Clouddienste zu verwalten.
+Dabei ist es möglich, Daten redundant zu speichern, jedoch nicht diese zu verschlüsseln.
+Weiterhin ist die Anwendung ausschließlich für Android verfügbar, was Benutzer mit anderen Systemen ausschließt.
+
+\paragraph{Otixo:}
+Das ist eine kostenpflichtige Webapplikation, welche die Verwaltung von Dateien über mehrere Cloudanbieter ermöglicht.
+Dabei ist eine redundante Speicherung der Daten ebenso wenig möglich, wie die Verschlüsselung selbiger.
+
+\paragraph{Primadesk:}
+Auch Primadesk ist eine kostenpflichtige Webapplikation, bei der es ebenso wie bei Otixo, nicht möglich ist, Dateien zu verschlüsseln oder redundant zu speichern.
+Jedoch werden mobile \acp{App} sowohl für Android als auch für iOS angeboten.
+
+\paragraph{Cloudfuze:}
+Cloudfuze ist eine reine Desktopapplikation, die ebenfalls kostenpflichtig ist.
+Auch diese Anwendung dient nur der Verwaltung mehrerer Clouddienste.
+Daher bietet sie einen ähnlichen Funktionsumfang wie Otixo oder auch Primadesk.
+
+\paragraph{TrueCrypt:}
+Neben den bisher vorgestellten Anwendungen gibt es auch lokale Lösungen zum Verschlüsseln der Daten.
+Eine Möglichkeit besteht darin Ordner mittels TrueCrypt zu verschlüsseln.
+Die Anwendung erzeugt aus den verschlüsselten Daten einen Container, welcher als virtuelle Festplatte von dem Programm selbst gemountet werden kann.
+Sowohl zum Verschlüsseln, als auch zum mounten, muss der Benutzer ein festgelegtes Passwort eingeben.
+Mit der Methode kann der Benutzer den Ordner, welcher von dem Cloudservices synchronisiert wird, Verschlüsseln und nur den Container zum Anbieter hochladen.
+Dadurch sind die Daten geschützt, jedoch lassen sich somit nicht mehrere Cloudanbieter zusammenfassen.
+Auch die Ausfallsicherheit ist bei dieser Methode nicht gewährleistet.
+
+Darüber hinaus muss der Benutzer bei TrueCrypt zuvor die Größe des Containers bestimmen.
+Das bedeutet, dass selbst wenn nur eine Textdatei in einem Container liegt, die Gesamtgröße der Datei festgelegt ist.
+Somit ergibt sich ein Overhead und die Uploadzeit steigt, je nach gewählter Dateigröße, stark an.
+Ein weiterer Nachteil ist, dass auf jedem Gerät, welches dieses Verfahren verwendet, TrueCrypt installiert sein muss, um den Inhalt der Dateien betrachten zu können.
+Es gibt mittlerweile auch mobile \acp{App}, die TrueCrypt-Container entschlüsseln, jedoch ist eine Verwaltung im Web derzeit nicht möglich.
+
+Es lässt sich festhalten, dass die vorgestellten Dienste Cloudservices um sinnvolle Funktionalitäten erweitern.
+Jedoch bietet keiner dieser Dienste die Funktionsvielfalt von CloudGrid.
+Die meisten der hier vorgestellten Dienste verbinden mehrere Services zu einem gemeinsamen, beziehungsweise ermöglichen die gleichzeitige Verwaltung mehrerer Services.
+Dabei wird wenig Wert auf die Dateisicherheit gelegt.
+Darüber hinaus sind viele Dienste nur mit einem kostenpflichtigen Abonnement im vollen Umfang nutzbar.
+Auch das Verfahren von TrueCrypt löst lediglich die Problematik der Dateisicherheit auf einem Service, jedoch nicht die Verknüpfung und redundante Speicherung über mehrere Anbieter.
+Weiterhin setzen alle Dienste, bis auf die TrueCrypt Methode, eine Registrierung bei dem entsprechenden Anbieter voraus.
+Eine rein clientseitige Verwaltung der Daten, wie es bei CloudGrid der Fall sein wird, liegt damit also nicht vor.
